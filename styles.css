@@ -116,8 +116,9 @@ section p {
 .about-content {
     align-items: center;
     display: flex;
+    flex-direction: row;
     gap: clamp(1.5rem, 5vw, 3.5rem);
-    justify-content: center;
+    justify-content: space-between;
     margin: 0 auto;
     max-width: 52rem;
     text-align: left;
@@ -128,23 +129,15 @@ section p {
     margin: 0;
 }
 
-.profile-photo-placeholder {
-    align-items: center;
+.profile-photo {
     aspect-ratio: 1;
     background: var(--surface-raised);
     border: 1px dashed #555d70;
     border-radius: 50%;
-    color: var(--muted);
-    display: flex;
+    display: block;
     flex: 0 0 11rem;
-    justify-content: center;
-    margin: 0;
-    text-align: center;
-}
-
-.profile-photo-placeholder span {
-    font-size: 0.9rem;
-    padding: 1rem;
+    height: 11rem;
+    object-fit: cover;
 }
 
 footer {
