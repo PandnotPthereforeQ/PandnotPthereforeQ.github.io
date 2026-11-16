@@ -16,7 +16,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 2rem;
+    scroll-padding-top: 10rem;
 }
 
 body {
@@ -33,10 +33,14 @@ body {
 }
 
 header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
     background: rgba(25, 28, 36, 0.96);
     border-bottom: 1px solid var(--border);
     padding: 1.25rem 0;
     text-align: center;
+    backdrop-filter: blur(12px);
 }
 
 header h1 {
