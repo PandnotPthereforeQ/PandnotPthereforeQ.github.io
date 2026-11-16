@@ -89,32 +89,12 @@ a:focus-visible {
     outline-offset: 4px;
 }
 
-.hero {
-    background: radial-gradient(ellipse at top, #29243b 0%, var(--background) 72%);
-    padding: clamp(5rem, 12vw, 8rem) 0;
-    text-align: center;
-}
-
-.hero h2 {
-    font-size: clamp(2.2rem, 6vw, 3.5rem);
-    letter-spacing: -0.045em;
-    line-height: 1.15;
-    margin: 0 0 1.25rem;
-}
-
-.hero p {
-    color: var(--muted);
-    font-size: clamp(1.05rem, 2vw, 1.2rem);
-    margin: 0 auto;
-    max-width: 42rem;
-}
-
-section:not(.hero) {
+section {
     padding: clamp(3rem, 7vw, 5rem) 0;
     text-align: center;
 }
 
-section:not(.hero):nth-of-type(even) {
+section:nth-of-type(even) {
     background: var(--surface);
 }
 
@@ -131,6 +111,40 @@ section p {
     font-size: 1.05rem;
     margin: 0 auto;
     max-width: 48rem;
+}
+
+.about-content {
+    align-items: center;
+    display: flex;
+    gap: clamp(1.5rem, 5vw, 3.5rem);
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 52rem;
+    text-align: left;
+}
+
+.about-content p {
+    flex: 1;
+    margin: 0;
+}
+
+.profile-photo-placeholder {
+    align-items: center;
+    aspect-ratio: 1;
+    background: var(--surface-raised);
+    border: 1px dashed #555d70;
+    border-radius: 50%;
+    color: var(--muted);
+    display: flex;
+    flex: 0 0 11rem;
+    justify-content: center;
+    margin: 0;
+    text-align: center;
+}
+
+.profile-photo-placeholder span {
+    font-size: 0.9rem;
+    padding: 1rem;
 }
 
 footer {
@@ -161,6 +175,11 @@ footer p {
 
     nav ul {
         gap: 0.2rem 0.85rem;
+    }
+
+    .about-content {
+        flex-direction: column;
+        text-align: center;
     }
 }
 
