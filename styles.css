@@ -153,6 +153,13 @@ footer p {
     margin: 0;
 }
 
+.footer-notice {
+    color: var(--muted);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    margin-top: 0.5rem;
+}
+
 @media (max-width: 600px) {
     body {
         padding-top: 9rem;
