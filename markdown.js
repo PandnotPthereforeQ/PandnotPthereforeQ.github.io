@@ -12,8 +12,9 @@
     function renderInline(source) {
         const protectedValues = [];
         const protect = (html) => {
-            const token = `@@PROTECTED_${protectedValues.length}@@`;
-            protectedValues.push(html);
+            // Private-use characters avoid Markdown emphasis/link rules corrupting tokens.
+            const token = `\uE000${protectedValues.length}\uE001`;
+            protectedValues.push({ token, html });
             return token;
         };
 
@@ -31,7 +32,9 @@
         html = html.replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g, "<em>$1</em>");
         html = html.replace(/(?<!_)_([^_\n]+)_(?!_)/g, "<em>$1</em>");
         html = html.replace(/  \n/g, "<br>\n");
-        html = html.replace(/@@PROTECTED_(\d+)@@/g, (_match, index) => protectedValues[Number(index)]);
+        protectedValues.forEach(({ token, html: protectedHtml }) => {
+            html = html.split(token).join(protectedHtml);
+        });
         return html;
     }
 
