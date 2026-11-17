@@ -17,8 +17,9 @@
             return token;
         };
 
-        // Keep inline math and code literal while applying Markdown formatting.
-        source = source.replace(/\$[^$\n]+\$/g, (math) => protect(escapeHtml(math)));
+        // Preserve LaTeX delimiters and source through Markdown escaping/formatting.
+        source = source.replace(/\$(?!\$)([^$\n]+?)\$(?!\$)|\\\((.+?)\\\)/g,
+            (math) => protect(escapeHtml(math)));
         source = source.replace(/`([^`]+)`/g, (_match, code) => protect(`<code>${escapeHtml(code)}</code>`));
         let html = escapeHtml(source);
 
@@ -42,6 +43,28 @@
             const line = lines[index];
             if (!line.trim()) {
                 index++;
+                continue;
+            }
+
+            // Support display math on a single line or between $$ / \[ delimiters.
+            const singleLineMath = line.match(/^\s*(\$\$|\\\[)(.+?)(\$\$|\\\])\s*$/);
+            if (singleLineMath) {
+                output.push(`<div class="math-display">${escapeHtml(singleLineMath[1] + singleLineMath[2] + singleLineMath[3])}</div>`);
+                index++;
+                continue;
+            }
+
+            const displayStart = line.match(/^\s*(\$\$|\\\[)\s*$/);
+            if (displayStart) {
+                const closing = displayStart[1] === "$$" ? "$$" : "\\]";
+                const mathLines = [];
+                index++;
+                while (index < lines.length && !new RegExp(`^\\s*${closing.replace(/[\\]/g, "\\\\")}\\s*$`).test(lines[index])) {
+                    mathLines.push(lines[index++]);
+                }
+                if (index < lines.length) index++;
+                const delimiters = displayStart[1] === "$$" ? ["$$", "$$"] : ["\\[", "\\]"];
+                output.push(`<div class="math-display">${escapeHtml(delimiters[0] + mathLines.join("\n") + delimiters[1])}</div>`);
                 continue;
             }
 
@@ -99,6 +122,7 @@
             index++;
             while (index < lines.length && lines[index].trim() &&
                    !/^\s*```/.test(lines[index]) &&
+                   !/^\s*(?:\$\$|\\\[)/.test(lines[index]) &&
                    !/^ {0,3}#{1,4}\s/.test(lines[index]) &&
                    !/^\s*([-*+]\s+|\d+\.\s+)/.test(lines[index]) &&
                    !/^\s*>/.test(lines[index])) {
@@ -116,4 +140,30 @@
         const target = document.getElementById(`${section}-content`);
         if (source && target) target.innerHTML = renderMarkdown(source.textContent);
     });
+
+    // Load MathJax with the AMS TeX package, then typeset the rendered Markdown.
+    window.MathJax = {
+        tex: {
+            packages: { "[+]": ["ams"] },
+            inlineMath: [["$", "$"], ["\\(", "\\)"]],
+            displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+            processEscapes: true
+        },
+        options: {
+            skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+        },
+        startup: { typeset: false }
+    };
+
+    const mathJaxScript = document.createElement("script");
+    mathJaxScript.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js";
+    mathJaxScript.async = true;
+    mathJaxScript.onload = () => {
+        const contentSections = document.querySelectorAll(".markdown-content");
+        window.MathJax.typesetPromise(contentSections).catch((error) => {
+            console.error("MathJax could not render the page mathematics:", error);
+        });
+    };
+    mathJaxScript.onerror = () => console.error("MathJax could not be loaded.");
+    document.head.appendChild(mathJaxScript);
 })();
