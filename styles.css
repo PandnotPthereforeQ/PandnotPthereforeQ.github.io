@@ -113,6 +113,18 @@ section p {
     max-width: 48rem;
 }
 
+.academic-section {
+    max-width: 48rem;
+}
+
+.academic-section h2 {
+    margin-bottom: 1.25rem;
+}
+
+.academic-section p {
+    line-height: 1.75;
+}
+
 .about-content {
     align-items: center;
     display: flex;
@@ -151,13 +163,6 @@ footer {
 footer p {
     font-size: 0.9rem;
     margin: 0;
-}
-
-.footer-notice {
-    color: var(--muted);
-    font-size: 0.75rem;
-    line-height: 1.5;
-    margin-top: 0.5rem;
 }
 
 @media (max-width: 600px) {
