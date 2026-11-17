@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Academic Website</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        window.MathJax = {
+            tex: {
+                packages: { "[+]": ["ams"] },
+                inlineMath: [["$", "$"], ["\\(", "\\)"]],
+                displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+                processEscapes: true
+            },
+            options: {
+                skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+            }
+        };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body>
     <header>
@@ -36,39 +50,29 @@
     <section id="research">
         <div class="container academic-section">
             <h2>Research</h2>
-            <div class="markdown-content" id="research-content"></div>
-            <script type="text/markdown" id="research-markdown">
-My research is mostly centered around topological quantum field theories. In particular, I'm interested in higher categories, low-dimensional topology, operadic algebras, and homotopy theory.
-
-The focus of my current research is on proving analogs of classical structure theorems of algebras but for $\infty$-operadic algebras, using Smith ideals as a key input.
-            </script>
+            <p>My research is mostly centered around topological quantum field theories. In particular, I'm interested in higher categories, low-dimensional topology, operadic algebras, and homotopy theory.</p>
+            <p>The focus of my current research is on proving analogs of classical structure theorems of algebras but for $\infty$-operadic algebras, using Smith ideals as a key input.</p>
         </div>
     </section>
 
     <section id="preprints" class="section">
         <div class="container academic-section">
             <h2>Preprints</h2>
-            <div class="markdown-content" id="preprints-content"></div>
-            <script type="text/markdown" id="preprints-markdown">
-(WIP) [Noether's Isomorphism Theorems for Smith Ideals of Operadic Algebras](uploads/Noether_s_Thms_for_operadic_algebras.pdf): We give an $\infty$-categorical definition of Smith ideals for an $\infty$-operad in a presentably symmetric monoidal pointed $\infty$-category, then prove the four isomorphism theorems.
-            </script>
+            <p>(WIP) <a href="uploads/Noether_s_Thms_for_operadic_algebras.pdf" target="_blank" rel="noopener noreferrer">Noether's Isomorphism Theorems for Smith Ideals of Operadic Algebras</a>: We give an $\infty$-categorical definition of Smith ideals for an $\infty$-operad in a presentably symmetric monoidal pointed $\infty$-category, then prove the four isomorphism theorems.</p>
         </div>
     </section>
 
     <section id="talks" class="section">
         <div class="container academic-section">
             <h2>Talks</h2>
-            <div class="markdown-content" id="talks-content"></div>
-            <script type="text/markdown" id="talks-markdown">
-- **June 2024, International Conference on Field Theory and Topology:**  
-  Towards a Structure Theory of $\mathbb{E}_n$-Monoidal $k$-Linear Categories, Micro Talk
-
-- **May 2024, Quantum Symmetries Conferences in the U.S. Midwest:**  
-  Towards a Structure Theory of $\mathbb{E}_n$-Monoidal $k$-Linear Categories, Micro Talk
-
-- **March 2023, SIAM Conference on Computational Science and Engineering:**  
-  Towards a Dominant SVD Computation via ADMM-like Decentralized Consensus & Optimization with Projection Splitting, Talk
-            </script>
+            <ul>
+                <li><strong>June 2024, International Conference on Field Theory and Topology:</strong><br>
+                    Towards a Structure Theory of $\mathbb{E}_n$-Monoidal $k$-Linear Categories, Micro Talk</li>
+                <li><strong>May 2024, Quantum Symmetries Conferences in the U.S. Midwest:</strong><br>
+                    Towards a Structure Theory of $\mathbb{E}_n$-Monoidal $k$-Linear Categories, Micro Talk</li>
+                <li><strong>March 2023, SIAM Conference on Computational Science and Engineering:</strong><br>
+                    Towards a Dominant SVD Computation via ADMM-like Decentralized Consensus &amp; Optimization with Projection Splitting, Talk</li>
+            </ul>
         </div>
     </section>
 
@@ -92,6 +96,5 @@ The focus of my current research is on proving analogs of classical structure th
             <p class="footer-notice">All original content on this site is protected by copyright. No scraping, harvesting, or AI training use is permitted without permission.</p>
         </div>
     </footer>
-    <script src="markdown.js" defer></script>
 </body>
 </html>
