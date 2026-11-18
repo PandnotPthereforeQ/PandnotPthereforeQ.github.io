@@ -83,6 +83,7 @@ a:hover {
     color: var(--accent-hover);
 }
 
+nav a:focus-visible,
 a:focus-visible {
     border-radius: 0.2rem;
     outline: 2px solid var(--accent-hover);
@@ -211,15 +212,29 @@ section p {
     margin: 0;
 }
 
+.profile-photo-wrap {
+    flex: 0 0 11rem;
+    margin: 0;
+    text-align: center;
+}
+
 .profile-photo {
     aspect-ratio: 1;
     background: var(--surface-raised);
     border: 1px dashed #555d70;
     border-radius: 50%;
     display: block;
-    flex: 0 0 11rem;
     height: 11rem;
+    max-width: 100%;
     object-fit: cover;
+    width: 11rem;
+}
+
+.photo-credit {
+    color: var(--muted);
+    font-size: 0.75rem;
+    line-height: 1.3;
+    margin-top: 0.4rem;
 }
 
 footer {
